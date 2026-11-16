@@ -1,0 +1,280 @@
+{
+  "version": 1,
+  "categories": [
+    { "slug": "languages", "name": "Diller", "icon": "translate", "color": "#2F80ED", "order": 1 },
+    { "slug": "programming", "name": "Programlama", "icon": "code", "color": "#27AE60", "order": 2 },
+    { "slug": "mathematics", "name": "Matematik", "icon": "functions", "color": "#F2994A", "order": 3 },
+    { "slug": "science", "name": "Bilim", "icon": "science", "color": "#9B51E0", "order": 4 }
+  ],
+  "courses": [
+    {
+      "slug": "english-a1",
+      "categorySlug": "languages",
+      "title": "İngilizce A1",
+      "description": "Selamlaşmadan günlük cümlelere, sıfırdan İngilizce.",
+      "level": "BEGINNER",
+      "units": [
+        {
+          "title": "Selamlaşma",
+          "lessons": [
+            {
+              "slug": "en-a1-greetings",
+              "title": "Merhaba!",
+              "xpReward": 10,
+              "explanation": "İngilizcede günün saatine göre farklı selamlar kullanılır. 'Hello' her zaman kullanılabilir; 'Good morning' sabah, 'Good evening' akşam söylenir.",
+              "examples": ["Hello! → Merhaba!", "Good morning! → Günaydın!", "Goodbye! → Hoşça kal!"],
+              "questions": [
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "\"Günaydın\" İngilizcede nasıl söylenir?",
+                  "payload": { "options": ["Good night", "Good morning", "Goodbye", "Good evening"] },
+                  "answerKey": { "index": 1 },
+                  "explanation": "\"Good morning\" sabah kullanılan selamdır."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "\"Goodbye\" bir vedalaşma ifadesidir.",
+                  "payload": {},
+                  "answerKey": { "value": true },
+                  "explanation": "\"Goodbye\" = \"Hoşça kal\"."
+                },
+                {
+                  "type": "MATCHING",
+                  "prompt": "Eşleştir",
+                  "payload": { "left": ["Hello", "Thank you", "Please"], "right": ["Lütfen", "Merhaba", "Teşekkürler"] },
+                  "answerKey": { "pairs": { "Hello": "Merhaba", "Thank you": "Teşekkürler", "Please": "Lütfen" } },
+                  "explanation": "Hello = Merhaba, Thank you = Teşekkürler, Please = Lütfen."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "Boşluğu doldur: \"Good ___!\" (İyi akşamlar)",
+                  "payload": { "sentence": "Good ___!" },
+                  "answerKey": { "accepted": ["evening"] },
+                  "explanation": "\"Good evening\" = İyi akşamlar."
+                }
+              ]
+            },
+            {
+              "slug": "en-a1-introductions",
+              "title": "Kendini Tanıt",
+              "xpReward": 10,
+              "explanation": "Kendini tanıtırken 'I am ...' (Ben ...im) ve 'My name is ...' (Benim adım ...) kalıplarını kullanırız.",
+              "examples": ["My name is Ali. → Benim adım Ali.", "I am a student. → Ben bir öğrenciyim.", "Nice to meet you. → Tanıştığıma memnun oldum."],
+              "questions": [
+                {
+                  "type": "WORD_ORDER",
+                  "prompt": "Cümleyi kur: \"Ben bir öğrenciyim.\"",
+                  "payload": { "words": ["student", "I", "a", "am"] },
+                  "answerKey": { "sentence": "I am a student" },
+                  "explanation": "Doğru sıra: I am a student."
+                },
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "\"Nice to meet you\" ne anlama gelir?",
+                  "payload": { "options": ["Görüşürüz", "Tanıştığıma memnun oldum", "Nasılsın?", "Adın ne?"] },
+                  "answerKey": { "index": 1 },
+                  "explanation": "\"Nice to meet you\" = Tanıştığıma memnun oldum."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "Boşluğu doldur: \"My ___ is Ayşe.\"",
+                  "payload": { "sentence": "My ___ is Ayşe." },
+                  "answerKey": { "accepted": ["name"] },
+                  "explanation": "\"My name is Ayşe\" = Benim adım Ayşe."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "\"I am\" kalıbı \"Ben ...im\" anlamına gelir.",
+                  "payload": {},
+                  "answerKey": { "value": true },
+                  "explanation": "I am = Ben ...im/...ım."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Sayılar ve Renkler",
+          "lessons": [
+            {
+              "slug": "en-a1-numbers",
+              "title": "Sayılar 1–10",
+              "xpReward": 10,
+              "explanation": "One, two, three, four, five, six, seven, eight, nine, ten.",
+              "examples": ["three → üç", "seven → yedi", "ten → on"],
+              "questions": [
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "\"Seven\" hangi sayıdır?",
+                  "payload": { "options": ["5", "6", "7", "8"] },
+                  "answerKey": { "index": 2 },
+                  "explanation": "Seven = 7."
+                },
+                {
+                  "type": "MATCHING",
+                  "prompt": "Eşleştir",
+                  "payload": { "left": ["two", "four", "nine"], "right": ["9", "2", "4"] },
+                  "answerKey": { "pairs": { "two": "2", "four": "4", "nine": "9" } },
+                  "explanation": "two = 2, four = 4, nine = 9."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "\"5\" İngilizce nasıl yazılır?",
+                  "payload": { "sentence": "5 = ___" },
+                  "answerKey": { "accepted": ["five"] },
+                  "explanation": "5 = five."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "\"Eight\" sayısı 6'dır.",
+                  "payload": {},
+                  "answerKey": { "value": false },
+                  "explanation": "Eight = 8, six = 6."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "python-basics",
+      "categorySlug": "programming",
+      "title": "Python Temelleri",
+      "description": "Değişkenler, veri tipleri ve ilk programın.",
+      "level": "BEGINNER",
+      "units": [
+        {
+          "title": "İlk Adımlar",
+          "lessons": [
+            {
+              "slug": "py-print",
+              "title": "print() ile Merhaba Dünya",
+              "xpReward": 15,
+              "explanation": "print() fonksiyonu ekrana yazı yazdırır. Metinler tırnak içinde yazılır.",
+              "examples": ["print(\"Merhaba\")  → Merhaba", "print(2 + 3)  → 5"],
+              "questions": [
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "print(2 + 3) ekrana ne yazar?",
+                  "payload": { "options": ["2 + 3", "23", "5", "Hata verir"] },
+                  "answerKey": { "index": 2 },
+                  "explanation": "Tırnak olmadığı için işlem yapılır: 5."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "print(\"2 + 3\") ekrana 5 yazar.",
+                  "payload": {},
+                  "answerKey": { "value": false },
+                  "explanation": "Tırnak içindeki ifade metindir; ekrana \"2 + 3\" yazılır."
+                },
+                {
+                  "type": "WORD_ORDER",
+                  "prompt": "Ekrana Merhaba yazdıran kodu kur",
+                  "payload": { "words": [")", "print", "\"Merhaba\"", "("] },
+                  "answerKey": { "sentence": "print ( \"Merhaba\" )" },
+                  "explanation": "Doğru kod: print(\"Merhaba\")."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "Ekrana yazı yazdıran fonksiyon: ___()",
+                  "payload": { "sentence": "___(\"Selam\")" },
+                  "answerKey": { "accepted": ["print"] },
+                  "explanation": "print() ekrana yazdırır."
+                }
+              ]
+            },
+            {
+              "slug": "py-variables",
+              "title": "Değişkenler",
+              "xpReward": 15,
+              "explanation": "Değişken, bir değeri isimle saklar: yas = 20. Eşittir işareti atama yapar.",
+              "examples": ["isim = \"Ece\"", "yas = 20", "print(yas + 1)  → 21"],
+              "questions": [
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "x = 4 ve y = x * 2 ise y kaçtır?",
+                  "payload": { "options": ["4", "6", "8", "42"] },
+                  "answerKey": { "index": 2 },
+                  "explanation": "y = 4 * 2 = 8."
+                },
+                {
+                  "type": "MATCHING",
+                  "prompt": "Değeri tipiyle eşleştir",
+                  "payload": { "left": ["\"merhaba\"", "42", "3.14"], "right": ["float", "str", "int"] },
+                  "answerKey": { "pairs": { "\"merhaba\"": "str", "42": "int", "3.14": "float" } },
+                  "explanation": "Metin str, tam sayı int, ondalıklı sayı float."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "Python'da değişken adı rakamla başlayabilir (ör. 1sayi).",
+                  "payload": {},
+                  "answerKey": { "value": false },
+                  "explanation": "Değişken adları harf veya _ ile başlamalıdır."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "a = 10 ise print(a ___ 5) çıktısı 15 olur",
+                  "payload": { "sentence": "print(a ___ 5)" },
+                  "answerKey": { "accepted": ["+"] },
+                  "explanation": "10 + 5 = 15."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "slug": "math-fractions",
+      "categorySlug": "mathematics",
+      "title": "Kesirler",
+      "description": "Kesirleri anla, sadeleştir ve topla.",
+      "level": "BEGINNER",
+      "units": [
+        {
+          "title": "Kesirlere Giriş",
+          "lessons": [
+            {
+              "slug": "math-fractions-intro",
+              "title": "Kesir Nedir?",
+              "xpReward": 10,
+              "explanation": "Kesir bir bütünün parçasını gösterir. Üstteki sayı pay, alttaki sayı paydadır. Pay ve paydayı aynı sayıya bölmek kesri sadeleştirir.",
+              "examples": ["1/2 → bütünün yarısı", "2/4 = 1/2", "3/3 = 1"],
+              "questions": [
+                {
+                  "type": "MULTIPLE_CHOICE",
+                  "prompt": "4/8 kesrinin en sade hali hangisidir?",
+                  "payload": { "options": ["2/4", "1/2", "1/4", "4/8"] },
+                  "answerKey": { "index": 1 },
+                  "explanation": "Pay ve payda 4'e bölünür: 1/2."
+                },
+                {
+                  "type": "TRUE_FALSE",
+                  "prompt": "3/4 kesrinde payda 3'tür.",
+                  "payload": {},
+                  "answerKey": { "value": false },
+                  "explanation": "Payda alttaki sayıdır: 4."
+                },
+                {
+                  "type": "FILL_BLANK",
+                  "prompt": "1/4 + 1/4 = ?/2",
+                  "payload": { "sentence": "1/4 + 1/4 = ___/2" },
+                  "answerKey": { "accepted": ["1"] },
+                  "explanation": "1/4 + 1/4 = 2/4 = 1/2."
+                },
+                {
+                  "type": "MATCHING",
+                  "prompt": "Eşit kesirleri eşleştir",
+                  "payload": { "left": ["2/4", "3/9", "3/12"], "right": ["1/3", "1/4", "1/2"] },
+                  "answerKey": { "pairs": { "2/4": "1/2", "3/9": "1/3", "3/12": "1/4" } },
+                  "explanation": "2/4 = 1/2, 3/9 = 1/3, 3/12 = 1/4."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

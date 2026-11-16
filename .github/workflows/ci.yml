@@ -1,0 +1,111 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  api:
+    name: API · typecheck, migrations, tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/api
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: eduverse
+          POSTGRES_PASSWORD: eduverse
+          POSTGRES_DB: eduverse
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U eduverse" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://eduverse:eduverse@localhost:5432/eduverse?schema=public
+      JWT_ACCESS_SECRET: ci-only-secret-ci-only-secret-ci-only-secret
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install
+        run: npm install --no-audit --no-fund
+      - name: Prisma generate
+        run: npx prisma generate
+      - name: Typecheck
+        run: npx tsc --noEmit -p tsconfig.json
+      - name: Apply migrations
+        run: npx prisma migrate deploy
+      - name: Migrations match schema
+        run: npx prisma migrate diff --from-url "$DATABASE_URL" --to-schema-datamodel prisma/schema.prisma --script --exit-code
+      - name: Seed
+        run: npm run seed
+      - name: Unit tests
+        run: npm test -- --ci
+      - name: E2E tests (vertical slice)
+        run: npm run test:e2e -- --ci
+      - name: Build
+        run: npm run build
+
+  mobile:
+    name: Mobile · analyze, test, APK
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Course content is in sync
+        run: cmp ../../packages/content/courses.json assets/content/courses.json
+      - name: Generate platform folders
+        run: |
+          flutter create --platforms=android,ios --org ai.eduverse --project-name eduverse_ai .
+          rm -f test/widget_test.dart
+          MANIFEST=android/app/src/main/AndroidManifest.xml
+          sed -i 's/android:label="eduverse_ai"/android:label="EduVerse AI"/' "$MANIFEST"
+          grep -q 'android.permission.INTERNET' "$MANIFEST" || sed -i 's#<application#<uses-permission android:name="android.permission.INTERNET"/>\n    <application#' "$MANIFEST"
+      - name: Pub get
+        run: flutter pub get
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos
+      - name: Tests
+        run: flutter test
+      - name: Build APK
+        run: |
+          flutter build apk --release --build-number=${{ github.run_number }} \
+            ${{ vars.API_BASE_URL && format('--dart-define=API_BASE_URL={0}', vars.API_BASE_URL) || '' }}
+          cp build/app/outputs/flutter-apk/app-release.apk ../../eduverse-ai.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eduverse-ai-apk
+          path: eduverse-ai.apk
+      - name: Publish release
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build-${{ github.run_number }}
+          name: EduVerse AI · build ${{ github.run_number }}
+          body: |
+            Otomatik derleme (${{ github.sha }}).
+            ${{ vars.API_BASE_URL && 'Sunucu modu' || 'Çevrimdışı mod: içerik ve ilerleme cihazda saklanır.' }}
+          files: eduverse-ai.apk
+          make_latest: true
