@@ -69,7 +69,7 @@ class LocalBackend implements EduverseBackend {
   String _id() => List.generate(16, (_) => _random.nextInt(256).toRadixString(16).padLeft(2, '0')).join();
 
   String _hash(String password, String salt) {
-    var digest = utf8.encode('$salt:$password');
+    List<int> digest = utf8.encode('$salt:$password');
     final key = utf8.encode(salt);
     for (var i = 0; i < 5000; i++) {
       digest = Hmac(sha256, key).convert(digest).bytes;

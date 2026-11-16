@@ -29,7 +29,6 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
   Map<String, dynamic>? _response;
   AnswerResult? _feedback;
   bool _checking = false;
-  int _correct = 0;
   CompletionResult? _result;
 
   @override
@@ -70,10 +69,7 @@ class _LessonScreenState extends ConsumerState<LessonScreen> {
       final result = await ref.read(backendProvider).submitAnswer(_attemptId!, q.id, _response!);
       HapticFeedback.mediumImpact();
       if (!mounted) return;
-      setState(() {
-        _feedback = result;
-        if (result.correct) _correct++;
-      });
+      setState(() => _feedback = result);
     } catch (e) {
       if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
     } finally {
