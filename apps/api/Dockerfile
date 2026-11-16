@@ -3,6 +3,7 @@ FROM node:20-bookworm-slim AS build
 WORKDIR /repo/apps/api
 RUN apt-get update && apt-get install -y --no-install-recommends openssl && rm -rf /var/lib/apt/lists/*
 COPY apps/api/package*.json ./
+COPY apps/api/prisma ./prisma
 RUN npm install --no-audit --no-fund
 COPY apps/api ./
 COPY packages /repo/packages

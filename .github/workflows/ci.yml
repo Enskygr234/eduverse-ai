@@ -33,6 +33,7 @@ jobs:
     env:
       NODE_ENV: test
       DATABASE_URL: postgresql://eduverse:eduverse@localhost:5432/eduverse?schema=public
+      DATABASE_URL_UNPOOLED: postgresql://eduverse:eduverse@localhost:5432/eduverse?schema=public
       JWT_ACCESS_SECRET: ci-only-secret-ci-only-secret-ci-only-secret
     steps:
       - uses: actions/checkout@v4

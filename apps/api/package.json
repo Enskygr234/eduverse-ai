@@ -13,7 +13,9 @@
     "prisma:check": "prisma migrate diff --from-url \"$DATABASE_URL\" --to-schema-datamodel prisma/schema.prisma --exit-code",
     "seed": "ts-node --transpile-only prisma/seed.ts",
     "test": "jest --config jest.config.js --selectProjects unit",
-    "test:e2e": "jest --config jest.config.js --selectProjects e2e --runInBand"
+    "test:e2e": "jest --config jest.config.js --selectProjects e2e --runInBand",
+    "vercel-build": "prisma generate && prisma migrate deploy && npm run seed && nest build && mkdir -p public",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.15",
