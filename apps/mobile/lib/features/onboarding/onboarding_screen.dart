@@ -124,7 +124,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             padding: const EdgeInsets.symmetric(horizontal: Space.xl),
             mainAxisSpacing: Space.md,
             crossAxisSpacing: Space.md,
-            childAspectRatio: 1.25,
+            childAspectRatio: 1.1,
             children: [
               for (final c in list)
                 _SelectTile(
@@ -171,11 +171,17 @@ class _SelectTile extends StatelessWidget {
             borderRadius: BorderRadius.circular(Radii.md),
             border: Border.all(color: selected ? color : scheme.outline, width: 2),
           ),
-          padding: const EdgeInsets.all(Space.lg),
+          padding: const EdgeInsets.all(Space.md),
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Icon(icon, size: 36, color: color),
+            Icon(icon, size: 34, color: color),
             const SizedBox(height: Space.sm),
-            Text(title, style: Theme.of(context).textTheme.titleMedium),
+            Flexible(
+              child: Text(title,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleMedium),
+            ),
           ]),
         ),
       ),
